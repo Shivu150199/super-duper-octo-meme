@@ -6,12 +6,12 @@ import { allJob } from '../redux/jobSlice'
 import JobCard from '../component/JobCard'
 
 const AllJob = () => {
-  const {data} = useSelector(state => state.jobState.joblist)
+  const { data } = useSelector((state) => state.jobState.joblist)
   console.log(data)
-const dispatch=useDispatch()
-  useEffect(()=>{
+  const dispatch = useDispatch()
+  useEffect(() => {
     dispatch(allJob())
-  },[])
+  }, [])
   return (
     <>
       <section className="flex items-center flex-col justify-center p-10">
@@ -83,13 +83,20 @@ const dispatch=useDispatch()
             </div>
           </form>
         </div>
-<div className='grid md:grid-cols-2 gap-6 mt-16 px-16'>
-{data.map((item)=>{
-  return <JobCard key={item._id} status={item.jobstatus} title={item.position} location={item.location} type={item.jobtype}/>
-})}
-
-</div>
-
+        <div className="grid md:grid-cols-2 gap-6 mt-16 px-16">
+          {data &&
+            data.map((item) => {
+              return (
+                <JobCard
+                  key={item._id}
+                  status={item.jobstatus}
+                  title={item.position}
+                  location={item.location}
+                  type={item.jobtype}
+                />
+              )
+            })}
+        </div>
       </section>
     </>
   )
