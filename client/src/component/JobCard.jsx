@@ -2,7 +2,26 @@ import React from 'react'
 import { FaLocationArrow } from 'react-icons/fa6'
 import { GrStatusDisabled } from 'react-icons/gr'
 import { FaShoppingBag } from 'react-icons/fa'
-const JobCard = ({title,location,status,type,company}) => {
+import { getSingleJob} from '../redux/jobSlice'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+
+const JobCard = ({ title, location, status, type, company, onClick ,eid}) => {
+  const dispatch=useDispatch()
+const navigate=useNavigate()
+
+
+  const editClick=async(id)=>{
+    try{
+    console.log('hello')
+    dispatch(getSingleJob(id))
+
+ navigate(`/alljob/${id}`)
+    }catch(e){
+      console.log(e)
+    }
+
+  }
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
       <div className="card-body">
@@ -26,8 +45,10 @@ const JobCard = ({title,location,status,type,company}) => {
         </div>
 
         <div className="card-actions justify-end">
-          <button className="btn btn-accent">Edit</button>
-          <button className="btn btn-accent">Delete</button>
+          <button className="btn btn-accent" onClick={()=>editClick(eid)}>Edit</button>
+          <button className="btn btn-accent" onClick={onClick}>
+            Delete
+          </button>
         </div>
       </div>
     </div>

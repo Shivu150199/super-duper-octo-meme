@@ -1,17 +1,32 @@
 import React, { useEffect } from 'react'
 import Input from '../component/Input'
-import SelectInput from '../component/SelectInput'
-import { useDispatch, useSelector } from 'react-redux'
-import { allJob } from '../redux/jobSlice'
-import JobCard from '../component/JobCard'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { allJob} from '../redux/jobSlice'
+import JobCard from '../component/JobCard'
+import { deleteJob } from '../redux/jobSlice'
+import { useNavigate } from 'react-router-dom'
+// import { useDispatch } from 'react-redux'
 const AllJob = () => {
-  const { data } = useSelector((state) => state.jobState.joblist)
-  console.log(data)
+  const navigate=useNavigate()
+  const { data} = useSelector((state) => state.jobState.joblist)
+ 
   const dispatch = useDispatch()
+
+  //  const dispatch = useDispatch()
+  const handleDelete = (uid) => {
+    console.log('hello')
+    dispatch(deleteJob(uid))
+  }
+  // const handleEdit=(eid)=>{
+  //  singleJob(eid)
+  //   navigate(`/alljob/${eid}`)
+  // }
+
   useEffect(() => {
     dispatch(allJob())
   }, [])
+
   return (
     <>
       <section className="flex items-center flex-col justify-center p-10">
@@ -86,6 +101,7 @@ const AllJob = () => {
         <div className="grid md:grid-cols-2 gap-6 mt-16 px-16">
           {data &&
             data.map((item) => {
+            
               return (
                 <JobCard
                   key={item._id}
@@ -93,6 +109,10 @@ const AllJob = () => {
                   title={item.position}
                   location={item.location}
                   type={item.jobtype}
+                  id={item._id}
+                  eid={item._id}
+                  onClick={() => handleDelete(item._id)}
+                  // editClick={()=>handleEdit(item._id)}
                 />
               )
             })}

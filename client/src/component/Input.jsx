@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({label,type,placeholder,onChange,id}) => {
+const Input = ({label,type,placeholder,onChange,id,value}) => {
   return (
     <label className="form-control w-full max-w-xs">
       <div className="label">
@@ -9,6 +9,7 @@ const Input = ({label,type,placeholder,onChange,id}) => {
       </div>
       <input
         type={type}
+        defaultValue={value}
         placeholder={placeholder}
         className="input input-bordered w-full max-w-xs"
         onChange={onChange}

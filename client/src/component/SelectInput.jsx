@@ -1,13 +1,13 @@
 import React from 'react'
 
-const SelectInput = ({label,fo,so,to,id,onChange}) => {
+const SelectInput = ({label,fo,so,to,id,onChange,value}) => {
   return (
     <label className="form-control w-full max-w-xs">
       <div className="label">
         <span className="label-text">{label}</span>
       
       </div>
-      <select className="select select-bordered" id={id} onChange={onChange}>
+      <select className="select select-bordered" id={id} onChange={onChange} defaultValue={value}>
         <option disabled >
           Choose an option
         </option>
