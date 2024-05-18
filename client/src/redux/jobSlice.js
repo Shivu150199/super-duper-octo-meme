@@ -54,7 +54,6 @@ export const getSingleJob = createAsyncThunk(
       let jobs = await axios.get(
         `http://localhost:3000/api/job/v1/alljobs/${id}`
       )
-   console.log(jobs.data)
       return jobs.data.data
     } catch (err) {
       return rejectWithValue(err)
@@ -63,13 +62,16 @@ export const getSingleJob = createAsyncThunk(
 )
 export const editJob = createAsyncThunk(
   'patch/editJob',
-  async ({id,jobData}, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
+   
     try {
       let jobs = await axios.patch(
-        `http://localhost:3000/api/job/v1/editjobs/${id}`,jobData
+        `http://localhost:3000/api/job/v1/editjobs/${id.id}`,id.editData
       )
-   
-      return jobs
+      console.log(id)
+      console.log(id.editData)
+   console.log(jobs.data)
+      return jobs.data
     } catch (err) {
       return rejectWithValue(err)
     }
@@ -83,9 +85,9 @@ const jobSlice = createSlice({
     handleJob: (state, action) => {
       state.formData = action.payload
     },
-  handleEditJob: (state, action) => {
-    state.singleJobState=action.payload
-  }
+  // handleEditJob: (state, action) => {
+  //   state.singleJobState=action.payload
+  // }
     
   },
   extraReducers: (builder) => {

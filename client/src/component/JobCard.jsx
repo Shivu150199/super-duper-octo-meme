@@ -11,15 +11,15 @@ const JobCard = ({ title, location, status, type, company, onClick ,eid}) => {
 const navigate=useNavigate()
 
 
-  const editClick=async(id)=>{
-    try{
-    console.log('hello')
-    dispatch(getSingleJob(id))
+  const editClick=(id)=>{
+  
+  
+    dispatch(getSingleJob(id)).then(()=>{
 
- navigate(`/alljob/${id}`)
-    }catch(e){
-      console.log(e)
-    }
+      navigate(`/alljob/${id}`)
+    })
+
+   
 
   }
   return (
