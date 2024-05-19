@@ -1,13 +1,13 @@
 import { Suspense, lazy, useState } from 'react'
 import LandingPage from './pages/LandingPage'
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import AddJob from './pages/AddJob'
 import AllJob from './pages/AllJob'
 import ProtectedRoute from './pages/ProtectedRoute'
-import { useSelector } from 'react-redux'
+
 import { ToastContainer } from 'react-toastify'
  import 'react-toastify/dist/ReactToastify.css'
 import Profile from './pages/Profile'
@@ -31,7 +31,8 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index path="addjob" element={<AddJob />} />
+          <Route index element={<Navigate to="addjob" replace />} />
+          <Route path="addjob" element={<AddJob />} />
           <Route path="alljob" element={<AllJob />} />
           <Route
             path="alljob/:id"
@@ -41,7 +42,7 @@ function App() {
               </Suspense>
             }
           />
-          <Route path='/user/profile' element={<Profile/>}/>
+          <Route path="/user/profile" element={<Profile />} />
         </Route>
 
         <Route path="*" element={<h1>404 page not found</h1>} />
