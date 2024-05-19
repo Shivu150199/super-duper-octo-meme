@@ -25,23 +25,18 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-try{
-   dispatch(createSignup(data)).then(()=>{
-
-     navigate('/login')
-     
-   })
-   
-}catch(err){
-  console.log(err)
- 
-}
- 
+    try {
+      dispatch(createSignup(data)).then(() => {
+        navigate('/login')
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-if(loading){
-  return <h1>loading .......</h1>
-}
+  if (loading) {
+    return <h1>loading .......</h1>
+  }
   return (
     <section className="w-screen h-screen grid grid-cols-1 md:grid-cols-2 gap-4 ">
       <div className="p-4 flex items-center justify-center ">
@@ -90,7 +85,7 @@ if(loading){
           >
             {loading ? 'loading..' : 'sign up'}
           </button>
-          <Oauth/>
+          <Oauth />
           <div className="text-red-700 flex items-center justify-center">
             {error ? error.message : ''}
           </div>

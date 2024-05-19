@@ -52,7 +52,11 @@ if (!user || !(await user.correctPassword(password, user.password))) {
 const token = signInToken(user._id)
 res.status(200).json({
   status: 'success',
+
   token,
+  data:{
+    user
+  }
 })
   }catch(err){
     console.log(err)
@@ -98,4 +102,43 @@ const { password: pass, ...rest } = user._doc
 catch(err){
   next(err)
 }
+}
+
+
+
+export const updateUser=async(req,res,next)=>{
+try{
+  let newUser=await User.findByIdAndUpdate(req.params.id,req.body,{
+    new:true,
+    runValidators:true
+  })
+  if(!newUser){
+    return next(errorHandler(404,'user not found'))
+  }
+  res.status(200).json({
+    status:'success',
+    data:{
+      user:newUser
+    }
+  })
+
+}catch(err){
+next(errorHandler(401,'not able to update'))
+}
+
+}
+
+
+export const getAllUsers=async(req,res,next) =>{
+  try{
+    let users=await User.find()
+    res.status(200).json({
+      status:'success',
+      data:{
+        users
+      }
+    })
+  }catch(err){
+    next(errorHandler(404,'user not fount'))
+  }
 }

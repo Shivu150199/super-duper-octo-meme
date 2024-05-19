@@ -6,8 +6,8 @@ import { ToastContainer, toast } from 'react-toastify'
 
 
 const Navbar = () => {
-  const {photo}=useSelector(state=>state.userState.user.data)
-  // console.log(user)
+  const photo=useSelector(state=>state.userState.user.photo)
+  // console.log(photo)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const handleLogout=async()=>{
@@ -25,7 +25,7 @@ const Navbar = () => {
             <div className="drawer">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
-                {/* Page content here */}
+           
                 <label
                   htmlFor="my-drawer"
                   className="drawer-button p-2 w-[3rem] h-[3rem] rounded button font-extrabold bg-teal-700 flex items-center justify-center text-3xl"
@@ -77,7 +77,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <Link to='/user/profile' className="justify-between">Profile</Link>
               </li>
 
               <li onClick={handleLogout}>

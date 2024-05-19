@@ -7,12 +7,14 @@ const initialState={
     loading:false,
     user:null,
     error:null,
+    profileData:{}
 
 }
 
 export const createSignup=createAsyncThunk('posts/createSignup',async(postData,{rejectWithValue})=>{
     try{
 const res=await axios.post('http://localhost:3000/api/auth/v1/signup',postData)
+console.log(res.data)
 return res.data
     }catch(err){
         console.log(err)
@@ -27,7 +29,8 @@ const res = await axios.post(
   'http://localhost:3000/api/auth/v1/login',
   userData
 )
-return res.data
+console.log(res.data.data.user)
+return res.data.data.user
 
 
     }catch(error){
@@ -40,7 +43,7 @@ const res = await axios.post(
   'http://localhost:3000/api/auth/v1/googleAuth',
   userData
 )
-return res.data
+return res.data.data
 
 
     }catch(error){
@@ -48,7 +51,18 @@ return thunkApi.rejectWithValue(error)
     }
 })
 
-
+export const updateUser=createAsyncThunk('patch/updateUser',async(data,{rejectWithValue})=>{
+  
+try{
+const updatedUser = await axios.patch(
+  `http://localhost:3000/api/auth/v1/update/${data.uid}`,data.formData
+)
+console.log(updatedUser.data.data.user)
+return updatedUser.data.data.user
+}catch(error){
+  return rejectWithValue(error)
+}
+})
 export const navigateToLogin = () => {
   return (dispatch) => {
     dispatch(navigate('/login'))
@@ -66,6 +80,9 @@ const userSlice=createSlice({
         clearData:(state)=>{
             state.user=null
 
+        },
+        handleUpdate:(state,action)=>{
+          state.profileData=action.payload
         }
     
     },
@@ -107,10 +124,18 @@ const userSlice=createSlice({
           .addCase(googleAuthentication.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
+          }).addCase(updateUser.pending,(state)=>{
+            state.loading=true
+          }).addCase(updateUser.fulfilled,(state,action)=>{
+            state.user=action.payload
+            state.loading=false
+          }).addCase(updateUser.rejected,(state,action)=>{
+            state.loading=false
+            state.error=action.payload
           })
     }
 })
 
-export const {handleData,clearData}=userSlice.actions
+export const {handleData,clearData,handleUpdate}=userSlice.actions
 
 export default userSlice.reducer

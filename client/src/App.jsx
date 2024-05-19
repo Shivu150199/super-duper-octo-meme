@@ -10,6 +10,7 @@ import ProtectedRoute from './pages/ProtectedRoute'
 import { useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
  import 'react-toastify/dist/ReactToastify.css'
+import Profile from './pages/Profile'
 // import EditJob from './pages/EditJob'
 const EditJob=lazy(()=>import('./pages/EditJob'))
 
@@ -40,6 +41,7 @@ function App() {
               </Suspense>
             }
           />
+          <Route path='/user/profile' element={<Profile/>}/>
         </Route>
 
         <Route path="*" element={<h1>404 page not found</h1>} />
