@@ -9,9 +9,9 @@ import Oauth from '../component/Oauth'
 
 const LoginPage = () => {
   const [formData, setFormData] = useState(null)
-  // const [loading, setLoading] = useState(false)
+
   let {loading,error}=useSelector((state=>state.userState))
-  // const [error, setError] = useState(null)
+ 
   const navigate = useNavigate()
   const dispatch=useDispatch()
 const handleChange = (e) => {

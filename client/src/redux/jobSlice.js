@@ -99,6 +99,7 @@ const jobSlice = createSlice({
       state.loading = false
       toast('Job Created')
       state.formData=null
+      //  navigate('/alljob')
     //   Navigate('/alljobs')
     })
     builder.addCase(createJob.rejected, (state, action) => {

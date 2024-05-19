@@ -4,8 +4,10 @@ import SelectInput from '../component/SelectInput'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { createJob, handleJob } from '../redux/jobSlice'
+import { useNavigate } from 'react-router-dom'
 
 const AddJob = () => {
+  const navigate=useNavigate()
   const dispatch = useDispatch()
   const { loading, formData, error } = useSelector((state) => state.jobState)
   console.log(formData)
@@ -17,6 +19,7 @@ const AddJob = () => {
     e.preventDefault()
     try {
       dispatch(createJob(formData))
+      navigate('/alljob')
     } catch (err) {
       console.log(err)
     }
@@ -24,7 +27,7 @@ const AddJob = () => {
 console.log(loading)
   return (
     <section className="flex items-center justify-center p-10">
-      <div className=" bg-zinc-700 p-6 rounded-md shadow-lg">
+      <div className=" bg-base-800 p-6 rounded-md shadow-lg">
         <h2 className="text-2xl font-medium">Add Job</h2>
         <form
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"

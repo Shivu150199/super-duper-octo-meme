@@ -13,15 +13,12 @@ const AllJob = () => {
  
   const dispatch = useDispatch()
 
-  //  const dispatch = useDispatch()
+
   const handleDelete = (uid) => {
     console.log('hello')
     dispatch(deleteJob(uid))
   }
-  // const handleEdit=(eid)=>{
-  //  singleJob(eid)
-  //   navigate(`/alljob/${eid}`)
-  // }
+
 
   useEffect(() => {
     dispatch(allJob())
@@ -30,7 +27,7 @@ const AllJob = () => {
   return (
     <>
       <section className="flex items-center flex-col justify-center p-10">
-        <div className=" bg-zinc-700 p-6 rounded-md shadow-lg">
+        <div className=" bg-base-700 p-6 rounded-md shadow-lg">
           <h2 className="text-2xl font-medium">All Job</h2>
           <form className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Input type="search" placeholder="Search" label="Serach" />
@@ -70,38 +67,24 @@ const AllJob = () => {
               </select>
             </label>
 
-            {/* <SelectInput
-            fo="Pending"
-            so="interview"
-            to="declined"
-            label="Job Status"
-          />
-          <SelectInput
-            fo="Full Time"
-            so="Part Time"
-            to="Interview"
-            label="Job Status"
-          /> */}
-            {/* <select name="type" id="type">
-            <option value="fulltime">Full Time</option>
-            <option value="parttime">parttime</option>
-            <option value="Internship">Internship</option>
-          </select> */}
+         
 
             <div className="flex items-end justify-center">
               <button
                 type="submit"
-                className="input input-bordered w-full max-w-xs bg-teal-800 hover:bg-teal-500 hover:text-black"
+                className="input text-black input-bordered w-full max-w-xs bg-teal-500 hover:bg-teal-600 "
               >
                 Submit
               </button>
             </div>
           </form>
         </div>
-        <div className="grid md:grid-cols-2 gap-6 mt-16 px-16">
-          {data &&
+        <div className='mt-16 text-4xl font-medium '>
+          <h1>All Job Details</h1>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 mt-8 px-16">
+          {data.length > 0 ? (
             data.map((item) => {
-            
               return (
                 <JobCard
                   key={item._id}
@@ -115,7 +98,10 @@ const AllJob = () => {
                   // editClick={()=>handleEdit(item._id)}
                 />
               )
-            })}
+            })
+          ) : (
+            <h1 className="text-4xl font-bold capitalize">no item found</h1>
+          )}
         </div>
       </section>
     </>

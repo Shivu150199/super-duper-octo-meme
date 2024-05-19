@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { clearData } from '../redux/userSlice'
-import { ToastContainer, toast } from 'react-toastify'
+import {  toast } from 'react-toastify'
+import Theme from './Theme'
 
 
 const Navbar = () => {
   const photo=useSelector(state=>state.userState.user.photo)
-  // console.log(photo)
+  const [theme,setTheme]=useState(false)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const handleLogout=async()=>{
@@ -15,17 +16,24 @@ const Navbar = () => {
   navigate('/landingpage')
   toast('user is logout')
   }
+const handleTheme=()=>{
+  setTheme(!theme)
+const element=document.querySelector('html')
+console.log(element.dataset.theme)
+!theme?element.dataset.theme='light':element.dataset.theme='dark'
+
+}
+
   return (
     <>
       {/*  */}
-      
+
       <div className="navbar bg-base-100">
         <div className="flex-1">
           <h1 className="tracking-wider font-bold text-white flex items-center justify-start gap-4">
             <div className="drawer">
               <input id="my-drawer" type="checkbox" className="drawer-toggle" />
               <div className="drawer-content">
-           
                 <label
                   htmlFor="my-drawer"
                   className="drawer-button p-2 w-[3rem] h-[3rem] rounded button font-extrabold bg-teal-700 flex items-center justify-center text-3xl"
@@ -57,10 +65,15 @@ const Navbar = () => {
                 </ul>
               </div>
             </div>
-            <span>Vault</span>
+            <h1 className="flex gap-4 items-center text-3xl">
+          
+              <span>Vault</span>
+            </h1>
           </h1>
         </div>
-        <div className="flex-none">
+        <div className="flex items-center justify-center">
+          {/* theme icon */}
+     <Theme/>
           <div className="dropdown dropdown-end"></div>
           <div className="dropdown dropdown-end">
             <div
@@ -77,7 +90,9 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to='/user/profile' className="justify-between">Profile</Link>
+                <Link to="/user/profile" className="justify-between">
+                  Profile
+                </Link>
               </li>
 
               <li onClick={handleLogout}>
