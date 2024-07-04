@@ -50,12 +50,12 @@ console.log(element.dataset.theme)
 
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                   {/* Sidebar content here */}
-                  <h1 className="flex gap-4 items-center text-3xl">
+                  <h2 className="flex gap-4 items-center text-3xl">
                     <span className="drawer-button p-2 w-[3rem] h-[3rem] rounded button font-extrabold bg-teal-700 flex items-center justify-center">
                       I
                     </span>{' '}
                     <span>Vault</span>
-                  </h1>
+                  </h2>
                   <li>
                     <Link to="/addjob">Add Job</Link>
                   </li>
@@ -65,10 +65,10 @@ console.log(element.dataset.theme)
                 </ul>
               </div>
             </div>
-            <h1 className="flex gap-4 items-center text-3xl">
+            <p className="flex gap-4 items-center text-3xl">
           
               <span>Vault</span>
-            </h1>
+            </p>
           </h1>
         </div>
         <div className="flex items-center justify-center">

@@ -24,7 +24,7 @@ const Oauth = () => {
         })
       ).then(() => {
         navigate('/alljob')
-        toast('sign up successfull')
+        // toast('sign up successfull')
       })
     } catch (err) {
       console.log(err)

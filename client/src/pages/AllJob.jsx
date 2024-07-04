@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 const AllJob = () => {
   const navigate=useNavigate()
-  const { data} = useSelector((state) => state.jobState.joblist)
+  const {data} = useSelector((state) => state.jobState.joblist)
+  console.log(data)
  
   const dispatch = useDispatch()
 
@@ -18,8 +19,6 @@ const AllJob = () => {
     console.log('hello')
     dispatch(deleteJob(uid))
   }
-
-
   useEffect(() => {
     dispatch(allJob())
   }, [])
